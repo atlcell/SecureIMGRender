@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.container {
+  display: flex;
+  width: 400px;
+  
+  .column {
+    max-width: 100%;
+    flex: 0 0 400px;
+  }
+  
+  img, canvas {
+    max-width: 100%;
+  }
+  
+  canvas {
+    border: 1px solid #ccc;
+  }
+}
+
+.video-container {
+  width: 400px;
+}
+	</style>
+</head>
+<body>
+	<div class="container">
+  <div class="column">
+    <img id="SourceImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Brill_windmill_April_2017.jpg/317px-Brill_windmill_April_2017.jpg" crossorigin="Anonymous">
+  </div>
+  <div class="column">
+    <div class="canvas">
+      <canvas class="canvas" id="Canvas"></canvas>
+    </div>
+  </div>
+</div>
+
+<button id="PaintButton">Paint</button>
+<button id="EffectButton">Invert Colors</button>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+	var effectButton;
+var paintButton;
+var canvas;
+var context;
+
+function init() {
+  effectButton = document.getElementById('EffectButton');
+  paintButton = document.getElementById('PaintButton');
+  canvas = document.getElementById('Canvas');
+  context = canvas.getContext('2d');
+  var image = document.getElementById('SourceImage');
+  
+  // Set the canvas the same width and height of the image
+  canvas.width = image.width;
+  canvas.height = image.height;
+
+  paintButton.addEventListener('click', function () {
+    drawImage(image);
+    // Or
+    // var image = new Image();
+    // image.onload = function () {
+    //    drawImage(image);
+    // }
+    // image.src = 'image.jpg';
+  });
+  
+  effectButton.addEventListener('click', onClick);
+}
+
+function drawImage(image) {
+  context.drawImage(image, 0, 0);
+}
+
+function onClick() {
+    var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    invertColors(imageData.data);
+    context.putImageData(imageData, 0, 0);
+}
+
+function invertColors(data) {
+  for (var i = 0; i < data.length; i+= 4) {
+    data[i] = data[i] ^ 255;
+    data[i+1] = data[i+1] ^ 255;
+    data[i+2] = data[i+2] ^ 255;
+  }
+}
+
+window.addEventListener('load', init);
+</script>
+</html>
