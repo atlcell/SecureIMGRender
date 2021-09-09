@@ -4,6 +4,8 @@
 
 basically a jpeg DRM engine
 
+![shawty](shawty.png)
+
 - Disregard the <img> tag
 
 - Buffer + HashMap approach
