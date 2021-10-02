@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        html {
+            font-family: sans-serif;
+            text-transform: uppercase;
+        }
+        main {
+            position: relative;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 500px;
+        }
+        img {
+            max-width: 150px;
+        }
+
+        canvas {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Source:</h3>
+    <!-- Public -->
+    <img id="public" src="https://cdn.vox-cdn.com/thumbor/Pkmq1nm3skO0-j693JTMd7RL0Zk=/0x0:2012x1341/1200x800/filters:focal(0x0:2012x1341)/cdn.vox-cdn.com/uploads/chorus_image/image/47070706/google2.0.0.jpg">
+
+    <!-- Personal -->
+    <img id="private1" src="http://192.168.1.113:1234/%23books/Lifestyle/FaceTime-Courtney.gif" alt="">
+    <img id="private2" src="http://192.168.1.113:1234/%23books/Lifestyle/Favorite-Restaurant.jpg" alt="">
+
+    <main>
+        <h3>Canvas:</h3>
+        <canvas id="myCanvas" width="1500" height="1000" style="border:1px solid #d3d3d3;">
+        <canvas id="myCanvas2" width="1500" height="1000" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML5 canvas tag.
+        </canvas>
+    </main>
+
+    <script>
+    window.onload = function() {
+      var img = document.getElementById("public");
+      var img2 = document.getElementById("private1");
+      var img3 = document.getElementById("private2");
+
+
+
+      var c = document.getElementById("myCanvas");
+      var c2 = document.getElementById("myCanvas2");
+      var ctx = c.getContext("2d");
+      var ctx2 = c2.getContext("2d");
+
+      ctx.drawImage(img, 0, 0);
+      ctx.drawImage(img2, 0, 0);
+      ctx2.drawImage(img3, 0, 0);
+    }
+    </script>
+
+</body>
+</html>
+
+
